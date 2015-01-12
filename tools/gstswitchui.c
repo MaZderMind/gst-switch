@@ -36,10 +36,12 @@
 
 
 gboolean verbose, disallow_quit;
+gchar *uifile = NULL;
 
 static GOptionEntry entries[] = {
-  {"verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose, "Be verbose", NULL},
-  {"dissalow-quit", 'Q', 0, G_OPTION_ARG_NONE, &disallow_quit, "Don't allow the user to quit the Application from the GUI", NULL},
+  {"verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose, "Be verbose.", NULL},
+  {"dissalow-quit", 'Q', 0, G_OPTION_ARG_NONE, &disallow_quit, "Don't allow the user to quit the Application from the GUI.", NULL},
+  {"ui-file", 'u', 0, G_OPTION_ARG_FILENAME, &uifile, "Supply a custom .glade-File to build the GUI from.", NULL},
   {NULL}
 };
 
@@ -77,7 +79,14 @@ main (int argc, char *argv[])
   gst_switch_ui_parse_args (&argc, &argv);
 
   /* Create builder and load interface */
-  builder = gtk_builder_new_from_file( "ui/gstswitchui.glade" );
+  if ( uifile )
+  {
+    builder = gtk_builder_new_from_file( uifile );
+  }
+  else
+  {
+    builder = gtk_builder_new_from_file( "ui/gstswitchui.glade" );
+  }
 
   /* Obtain widgets that we need */
   INFO("loading mainwindow from builder-file");
