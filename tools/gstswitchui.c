@@ -35,10 +35,11 @@
 #include "logutils.h"
 
 
-gboolean verbose;
+gboolean verbose, disallow_quit;
 
 static GOptionEntry entries[] = {
   {"verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose, "Be verbose", NULL},
+  {"dissalow-quit", 'Q', 0, G_OPTION_ARG_NONE, &disallow_quit, "Don't allow the user to quit the Application from the GUI", NULL},
   {NULL}
 };
 
@@ -82,6 +83,12 @@ main (int argc, char *argv[])
   INFO("loading mainwindow from builder-file");
   data.mainwindow = GTK_WIDGET( gtk_builder_get_object( builder, "mainwindow" ) );
 
+  /* if the application is set non-quittable, try to disable the quit-button */
+  if (disallow_quit)
+  {
+    gtk_window_set_deletable( GTK_WINDOW( data.mainwindow ), FALSE );
+  }
+
   INFO("loading quitdialog from builder-file");
   data.quitdialog = GTK_WIDGET( gtk_builder_get_object( builder, "quitdialog" ) );
 
@@ -103,6 +110,13 @@ cb_delete_event( GtkWidget *window,
                  GdkEvent  *event,
                  UiData    *data )
 {
+  /* if the application is set non-quittable, always return TRUE */
+  if (disallow_quit)
+  {
+    INFO("the application was started none-quittable'from the gui");
+    return TRUE;
+  }
+
   gint response = 1;
 
   /* Run dialog */
