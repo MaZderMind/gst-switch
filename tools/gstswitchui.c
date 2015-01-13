@@ -66,6 +66,12 @@ gst_switch_ui_parse_args (int *argc, char **argv[])
   g_option_context_free (context);
 }
 
+static void
+gst_switch_ui_free_args ()
+{
+  g_free(uifile);
+}
+
 /**
  * @brief The entry of gst-switch-ui.
  */
@@ -110,6 +116,8 @@ main (int argc, char *argv[])
   /* Show main window and start main loop */
   gtk_widget_show( data.mainwindow );
   gtk_main();
+
+  gst_switch_ui_free_args();
 
   return 0;
 }
