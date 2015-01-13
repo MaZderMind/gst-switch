@@ -114,6 +114,10 @@ main (int argc, char *argv[])
   return 0;
 }
 
+/**
+ * @brief Called when the Main-Window is about to get deleted.
+ *    Potentially asks the user is this is ok.
+ */
 G_MODULE_EXPORT gboolean
 cb_delete_event( GtkWidget *window,
                  GdkEvent  *event,
@@ -122,7 +126,7 @@ cb_delete_event( GtkWidget *window,
   /* if the application is set non-quittable, always return TRUE */
   if (disallow_quit)
   {
-    INFO("the application was started none-quittable'from the gui");
+    INFO("the application was started none-quittable from the gui");
     return TRUE;
   }
 
