@@ -4,6 +4,9 @@ else
   bin_PROGRAMS = gst-switch-srv gst-switch-ui gst-switch-cap
 endif
 
+BUILT_SOURCES = gstswitchui_gresource.c  gstswitchui_gresource.h
+CLEANFILES = gstswitchui_gresource.c  gstswitchui_gresource.h
+
 if GCOV_ENABLED
 # --coverage
 GCOV_CFLAGS = -fprofile-arcs -ftest-coverage
@@ -38,6 +41,13 @@ gst_switch_ui_CFLAGS = $(GST_CFLAGS) $(GST_BASE_CFLAGS) $(GCOV_CFLAGS) \
 gst_switch_ui_LDFLAGS = $(GCOV_LFLAGS) $(GST_LIBS) $(GST_BASE_LIBS) \
   $(GST_PLUGINS_BASE_LIBS) $(GSTPB_BASE_LIBS) -lm -rdynamic
 gst_switch_ui_LDADD = $(GST_LIBS) $(X_LIBS) $(LIBM) $(GTK_LIBS) $(GLIB_LIBS)
+nodist_gst_switch_ui_SOURCES = gstswitchui_gresource.c  gstswitchui_gresource.h
+
+gstswitchui_gresource.c: ../ui/gstswitchui.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir=$(srcdir) ../ui/gstswitchui.gresource.xml)
+	$(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(top_builddir)/ui --generate-source --c-name _g_gstswitchui ../ui/gstswitchui.gresource.xml
+
+gstswitchui_gresource.h: ../ui/gstswitchui.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir=$(srcdir) ../ui/gstswitchui.gresource.xml)
+	$(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(top_builddir)/ui --generate-header --c-name _g_gstswitchui ../ui/gstswitchui.gresource.xml
 
 gst_switch_cap_SOURCES = gstworker.c gstswitchcapture.c gstswitchclient.c
 gst_switch_cap_CFLAGS = $(GST_CFLAGS) $(GST_BASE_CFLAGS) $(GCOV_CFLAGS) \

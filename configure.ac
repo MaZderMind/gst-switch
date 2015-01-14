@@ -152,6 +152,12 @@ dnl set proper LDFLAGS for plugins
 GST_PLUGIN_LDFLAGS='-module -avoid-version -export-symbols-regex [_]*\(gst_\|Gst\|GST_\).*'
 AC_SUBST(GST_PLUGIN_LDFLAGS)
 
+dnl est for glib-compile-resources program
+AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources, no)
+if test x$GLIB_COMPILE_RESOURCES = xno; then
+  AC_MSG_ERROR(Could not find a glib-compile-resources in your PATH)
+fi
+
 dnl === Testing ===============================================================
 
 GLIB_TESTS

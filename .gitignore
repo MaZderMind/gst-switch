@@ -57,6 +57,8 @@ imgurbash.sh.*
 /tools/gst-switch-cap
 /tools/*.gcno
 /tools/*.gcda
+tools/gstswitchui_gresource.c
+tools/gstswitchui_gresource.h
 /test-switch-srv.out
 /tests/test-mix-source
 /tests/test-switch-server
