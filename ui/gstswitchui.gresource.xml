@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/us/timvideos/gst-switch-ui">
-    <file compressed="true">gstswitchui.glade</file>
+    <file compressed="true">gstswitchui.ui</file>
     <file>none.png</file>
     <file>pip.png</file>
     <file>sbs-equal.png</file>

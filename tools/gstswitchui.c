@@ -91,7 +91,7 @@ main (int argc, char *argv[])
   }
   else
   {
-    builder = gtk_builder_new_from_resource( "/us/timvideos/gst-switch-ui/gstswitchui.glade" );
+    builder = gtk_builder_new_from_resource( "/us/timvideos/gst-switch-ui/gstswitchui.ui" );
   }
 
   /* Obtain widgets that we need */
