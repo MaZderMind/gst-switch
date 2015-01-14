@@ -43,10 +43,10 @@ gst_switch_ui_LDFLAGS = $(GCOV_LFLAGS) $(GST_LIBS) $(GST_BASE_LIBS) \
 gst_switch_ui_LDADD = $(GST_LIBS) $(X_LIBS) $(LIBM) $(GTK_LIBS) $(GLIB_LIBS)
 nodist_gst_switch_ui_SOURCES = gstswitchui_gresource.c  gstswitchui_gresource.h
 
-gstswitchui_gresource.c: ../ui/gstswitchui.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir=$(srcdir) ../ui/gstswitchui.gresource.xml)
+gstswitchui_gresource.c: ../ui/gstswitchui.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir=$(top_builddir)/ui ../ui/gstswitchui.gresource.xml)
 	$(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(top_builddir)/ui --generate-source --c-name _g_gstswitchui ../ui/gstswitchui.gresource.xml
 
-gstswitchui_gresource.h: ../ui/gstswitchui.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir=$(srcdir) ../ui/gstswitchui.gresource.xml)
+gstswitchui_gresource.h: ../ui/gstswitchui.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir=$(top_builddir)/ui ../ui/gstswitchui.gresource.xml)
 	$(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(top_builddir)/ui --generate-header --c-name _g_gstswitchui ../ui/gstswitchui.gresource.xml
 
 gst_switch_cap_SOURCES = gstworker.c gstswitchcapture.c gstswitchclient.c
