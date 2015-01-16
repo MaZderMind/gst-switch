@@ -92,21 +92,9 @@ class GstSwichUI:
 
     self.primary_video_pipeline.set_state(Gst.State.PLAYING)
 
-  def primary_video_syncmsg(self, bus, message):
-    struct = message.get_structure()
-    print(struct.get_name())
-    if struct is None:
-        return False
-
-    if struct.get_name() == "prepare-window-handle":
-        Gdk.threads_enter()
-        Gdk.Display.get_default().sync()
-
-        imagesink = message.src
-        imagesink.set_property("force-aspect-ratio", True)
-        imagesink.set_window_handle(self.primary_video_widget_id)
-
-        Gdk.threads_leave()
+  def primary_video_syncmsg(self, bus, msg):
+    if msg.get_structure().get_name() == "prepare-window-handle":
+        msg.src.set_window_handle(self.primary_video_widget_id)
 
   def on_error(self, bus, msg):
       self.log.error('on_error():', msg.parse_error())
