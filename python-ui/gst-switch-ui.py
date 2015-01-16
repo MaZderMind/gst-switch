@@ -84,9 +84,9 @@ class GstSwichUI:
     primary_video_widget.realize()
     self.primary_video_widget_id = primary_video_widget.get_property('window').get_xid()
 
-    bus = self.primary_video_pipeline.get_bus() 
-    bus.add_signal_watch() 
-    bus.enable_sync_message_emission() 
+    bus = self.primary_video_pipeline.get_bus()
+    bus.add_signal_watch()
+    bus.enable_sync_message_emission()
     bus.connect("sync-message::element", self.primary_video_syncmsg)
 
     self.primary_video_pipeline.set_state(Gst.State.PLAYING)
