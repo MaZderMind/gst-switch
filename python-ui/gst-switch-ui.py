@@ -86,6 +86,7 @@ class GstSwichUI:
 
     bus = self.primary_video_pipeline.get_bus()
     bus.add_signal_watch()
+    bus.connect('message::error', self.on_error)
     bus.enable_sync_message_emission()
     bus.connect("sync-message::element", self.primary_video_syncmsg)
 
@@ -107,6 +108,8 @@ class GstSwichUI:
 
         Gdk.threads_leave()
 
+  def on_error(self, bus, msg):
+      self.log.error('on_error():', msg.parse_error())
 
   def run(self):
     self.win.show_all()
