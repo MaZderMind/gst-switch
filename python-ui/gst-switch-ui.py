@@ -23,7 +23,9 @@ from gi.repository import GLib, Gtk, Gdk, Gst, GObject, GdkX11, GstVideo
 
 # init GObject before importing local classes
 GObject.threads_init()
-Gst.init(None)
+Gdk.init([])
+Gtk.init([])
+Gst.init([])
 
 class GstSwichUI:
   """ UI Controller Class """
