@@ -27,9 +27,42 @@ Gdk.init([])
 Gtk.init([])
 Gst.init([])
 
-class GstSwichUI:
+class UIVideoDisplay:
+  """ Displays a GST-Switch Server-Video into a GtkWidget """
+  log = logging.getLogger('UI.VideoDisplay')
+
+  def __init__(self, port, widget):
+    pstr = 'tcpclientsrc port={} ! gdpdepay ! xvimagesink sync=false'.format(port)
+    self.log.info('launching gstreamer-pipeline for widget %s: %s', widget.get_name(), pstr)
+
+    self.pipeline = Gst.parse_launch(pstr)
+
+    widget.realize()
+    self.xid = widget.get_property('window').get_xid()
+
+    bus = self.pipeline.get_bus()
+    bus.add_signal_watch()
+    bus.enable_sync_message_emission()
+
+    bus.connect('message::error', self.on_error)
+    bus.connect("sync-message::element", self.on_syncmsg)
+
+  def run(self):
+    self.pipeline.set_state(Gst.State.PLAYING)
+
+
+  def on_syncmsg(self, bus, msg):
+    if msg.get_structure().get_name() == "prepare-window-handle":
+        msg.src.set_window_handle(self.xid)
+
+  def on_error(self, bus, msg):
+      self.log.error('on_error():', msg.parse_error())
+
+
+
+class UIController:
   """ UI Controller Class """
-  log = logging.getLogger('GstSwichUI')
+  log = logging.getLogger('UI.Controller')
 
   # Construct the UI from a Glade-File
   def __init__(self, options):
@@ -70,37 +103,19 @@ class GstSwichUI:
     if self.options.dissalow_quit:
       self.win.set_deletable(False)
 
+    # Open a Control-Connection to the Server
     self.ctr = Controller()
     self.ctr.establish_connection()
 
-    self.connect_primary_video()
+    # Configure a GStreamer Pipeline showing the Composite-Video in the primary_video-Section of the GUI
+    self.primary_video_display = UIVideoDisplay(
+      widget=self.builder.get_object('primary_video'),
+      port=self.ctr.get_compose_port())
 
-  def connect_primary_video(self):
-    self.primary_video_pipeline = Gst.parse_launch('tcpclientsrc port={port} ! gdpdepay ! xvimagesink'.format(
-      port=self.ctr.get_compose_port()
-    ))
-
-    primary_video_widget = self.builder.get_object('primary_video')
-    primary_video_widget.realize()
-    self.primary_video_widget_id = primary_video_widget.get_property('window').get_xid()
-
-    bus = self.primary_video_pipeline.get_bus()
-    bus.add_signal_watch()
-    bus.connect('message::error', self.on_error)
-    bus.enable_sync_message_emission()
-    bus.connect("sync-message::element", self.primary_video_syncmsg)
-
-    self.primary_video_pipeline.set_state(Gst.State.PLAYING)
-
-  def primary_video_syncmsg(self, bus, msg):
-    if msg.get_structure().get_name() == "prepare-window-handle":
-        msg.src.set_window_handle(self.primary_video_widget_id)
-
-  def on_error(self, bus, msg):
-      self.log.error('on_error():', msg.parse_error())
-
+  # Run all GStreamer Pipelines and the GTK-Mainloop
   def run(self):
     self.win.show_all()
+    self.primary_video_display.run()
     Gtk.main()
 
 
@@ -124,7 +139,7 @@ def parseArgs():
 
 def main():
   """ Main Entry-Point """
-  log = logging.getLogger('main()')
+  log = logging.getLogger('UI')
 
   # parse command-line args
   args = parseArgs()
@@ -137,7 +152,7 @@ def main():
 
   # construct the UI from a Glade-File
   log.debug('constructing UI')
-  ui = GstSwichUI(args)
+  ui = UIController(args)
 
   # Launch UI processed
   log.debug('running UI')
