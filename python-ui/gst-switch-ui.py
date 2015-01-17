@@ -32,10 +32,6 @@ class UIVideoDisplay:
   log = logging.getLogger('UI.VideoDisplay')
 
   def __init__(self, port, widget):
-    if not widget:
-      self.log.error('No widget supplied. Is it present in your .ui-File and named correctly?')
-      raise Exception('UIVideoDisplay initialized without a widget')
-
     pstr = 'tcpclientsrc port={} ! gdpdepay ! xvimagesink sync=false'.format(port)
     self.log.info('launching gstreamer-pipeline for widget %s: %s', widget.get_name(), pstr)
 
@@ -99,11 +95,7 @@ class UIController:
 
     # Aquire the Main-Window from the UI-File
     self.log.debug('Loading Main-Window "window"  from .ui-File')
-    self.win = self.builder.get_object("window")
-
-    if not self.win:
-      self.log.error('Main-Window "window" found in .ui-File. Is it present and named correctly?')
-      raise Exception('Main-Window not found in .ui-File')
+    self.win = self.get_check_widget("window")
 
     # Connect Close-Handler
     self.win.connect("delete-event", Gtk.main_quit)
@@ -123,8 +115,18 @@ class UIController:
     # Configure a GStreamer Pipeline showing the Composite-Video in the primary_video-Section of the GUI
     self.log.debug('Starting UIVideoDisplay for primary_video-Widget')
     self.primary_video_display = UIVideoDisplay(
-      widget=self.builder.get_object('primary_video'),
+      widget=self.get_check_widget('primary_video'),
       port=self.ctr.get_compose_port())
+
+
+  def get_check_widget(self, widget_id):
+    widget = self.builder.get_object(widget_id)
+    if not widget:
+      self.log.error('could not load required widget "%s" from the .ui-File', widget_id)
+      raise Exception('Widget not found in .ui-File')
+
+    return widget
+
 
   # Run all GStreamer Pipelines and the GTK-Mainloop
   def run(self):
