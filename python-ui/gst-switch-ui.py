@@ -17,7 +17,7 @@ for path in paths:
 
 # load gst-switch modules
 from gstswitch.controller import Controller
-from gstswitch.exception import ConnectionReturnError
+from gstswitch.exception import ConnectionError, ConnectionReturnError
 from gstswitch.connection import Connection
 from gi.repository import GLib, Gtk, Gdk, Gst, GObject, GdkX11, GstVideo
 
@@ -32,6 +32,10 @@ class UIVideoDisplay:
   log = logging.getLogger('UI.VideoDisplay')
 
   def __init__(self, port, widget):
+    if not widget:
+      self.log.error('No widget supplied. Is it present in your .ui-File and named correctly?')
+      raise Exception('UIVideoDisplay initialized without a widget')
+
     pstr = 'tcpclientsrc port={} ! gdpdepay ! xvimagesink sync=false'.format(port)
     self.log.info('launching gstreamer-pipeline for widget %s: %s', widget.get_name(), pstr)
 
@@ -85,7 +89,7 @@ class UIController:
 
       # Look for a gst-switch UI-File and load it
       for path in paths:
-        self.log.info('trying to load ui-file from file %s', path)
+        self.log.debug('trying to load ui-file from file %s', path)
 
         if os.path.isfile(path):
           self.log.info('loading ui-file from file %s', path)
@@ -94,7 +98,12 @@ class UIController:
 
 
     # Aquire the Main-Window from the UI-File
+    self.log.debug('Loading Main-Window "window"  from .ui-File')
     self.win = self.builder.get_object("window")
+
+    if not self.win:
+      self.log.error('Main-Window "window" found in .ui-File. Is it present and named correctly?')
+      raise Exception('Main-Window not found in .ui-File')
 
     # Connect Close-Handler
     self.win.connect("delete-event", Gtk.main_quit)
@@ -105,9 +114,14 @@ class UIController:
 
     # Open a Control-Connection to the Server
     self.ctr = Controller()
-    self.ctr.establish_connection()
+    try:
+      self.ctr.establish_connection()
+    except ConnectionError as e:
+      self.log.error('Could not connect to gst-switch-srv Server')
+      raise e
 
     # Configure a GStreamer Pipeline showing the Composite-Video in the primary_video-Section of the GUI
+    self.log.debug('Starting UIVideoDisplay for primary_video-Widget')
     self.primary_video_display = UIVideoDisplay(
       widget=self.builder.get_object('primary_video'),
       port=self.ctr.get_compose_port())
