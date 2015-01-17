@@ -144,6 +144,7 @@
               <object class="GtkBox" id="composite_buttons">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="spacing">10</property>
                 <child>
                   <object class="GtkRadioButton" id="composite_none_button">
                     <property name="label" translatable="yes">No Composition</property>
@@ -246,6 +247,7 @@
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
+                <property name="padding">10</property>
                 <property name="position">1</property>
               </packing>
             </child>
