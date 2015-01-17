@@ -121,6 +121,11 @@ class UIController:
     buttons = composite_buttons.get_children()
     buttons[mode-1].set_active(True)
 
+    # Connect Callback-Events with UI-Controller function
+    self.builder.connect_signals({
+      "composite_button_clicked": self.composite_button_clicked,
+    })
+
     # Configure a GStreamer Pipeline showing the Composite-Video in the primary_video-Section of the GUI
     self.log.debug('Starting UIVideoDisplay for primary_video-Widget')
     self.primary_video_display = UIVideoDisplay(
@@ -143,6 +148,20 @@ class UIController:
     self.primary_video_display.run()
     Gtk.main()
 
+
+  # Click on one of the Composition-Mode selection Buttons
+  def composite_button_clicked(self, btn):
+    # Ignore the event on the now de-selected Button
+    if not btn.get_active():
+      return
+
+    composite_buttons = self.get_check_widget('composite_buttons')
+    composite_buttons = self.get_check_widget('composite_buttons')
+    buttons = composite_buttons.get_children()
+    idx = buttons.index(btn)
+
+    self.log.info('switching to new composition-mode: %u', idx)
+    self.ctr.set_composite_mode(idx)
 
 
 def parseArgs():

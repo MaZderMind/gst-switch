@@ -156,6 +156,7 @@
                     <property name="always_show_image">True</property>
                     <property name="active">True</property>
                     <property name="draw_indicator">False</property>
+                    <signal name="clicked" handler="composite_button_clicked" swapped="no"/>
                     <accelerator key="F1" signal="clicked"/>
                   </object>
                   <packing>
@@ -176,6 +177,7 @@
                     <property name="always_show_image">True</property>
                     <property name="draw_indicator">False</property>
                     <property name="group">composite_none_button</property>
+                    <signal name="clicked" handler="composite_button_clicked" swapped="no"/>
                     <accelerator key="F2" signal="clicked"/>
                   </object>
                   <packing>
@@ -196,6 +198,7 @@
                     <property name="always_show_image">True</property>
                     <property name="draw_indicator">False</property>
                     <property name="group">composite_none_button</property>
+                    <signal name="clicked" handler="composite_button_clicked" swapped="no"/>
                     <accelerator key="F3" signal="clicked"/>
                   </object>
                   <packing>
@@ -216,6 +219,7 @@
                     <property name="always_show_image">True</property>
                     <property name="draw_indicator">False</property>
                     <property name="group">composite_none_button</property>
+                    <signal name="clicked" handler="composite_button_clicked" swapped="no"/>
                     <accelerator key="F4" signal="clicked"/>
                   </object>
                   <packing>
