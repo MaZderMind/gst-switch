@@ -112,6 +112,15 @@ class UIController:
       self.log.error('Could not connect to gst-switch-srv Server')
       raise e
 
+    # Aquire current Composition-Mode
+    mode = self.ctr.get_composite_mode()
+    self.log.info("current composition-mode is: %u", mode)
+
+    # Select the correct Button and set it Active
+    composite_buttons = self.get_check_widget('composite_buttons')
+    buttons = composite_buttons.get_children()
+    buttons[mode-1].set_active(True)
+
     # Configure a GStreamer Pipeline showing the Composite-Video in the primary_video-Section of the GUI
     self.log.debug('Starting UIVideoDisplay for primary_video-Widget')
     self.primary_video_display = UIVideoDisplay(
