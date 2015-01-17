@@ -2,286 +2,161 @@
 <!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
-  <object class="GtkRadioToolButton" id="composite_mode">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="label" translatable="yes">toolbutton</property>
-    <property name="active">True</property>
-  </object>
-  <object class="GtkImage" id="icon_composite_none">
+  <object class="GtkImage" id="composite_none">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="pixbuf">none.png</property>
-    <property name="icon_size">3</property>
   </object>
-  <object class="GtkImage" id="icon_composite_pip">
+  <object class="GtkImage" id="composite_pip">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="pixbuf">pip.png</property>
   </object>
-  <object class="GtkImage" id="icon_composite_sbs_dual">
+  <object class="GtkImage" id="composite_sbs_equal">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="pixbuf">sbs-equal.png</property>
   </object>
-  <object class="GtkImage" id="icon_composite_sbs_preview">
+  <object class="GtkImage" id="composite_sbs_preview">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="pixbuf">sbs-preview.png</property>
   </object>
   <object class="GtkWindow" id="window">
+    <property name="width_request">1450</property>
+    <property name="height_request">800</property>
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkBox" id="top_box">
+      <object class="GtkPaned" id="main_paned">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
+        <property name="can_focus">True</property>
         <child>
-          <object class="GtkMenuBar" id="menubar">
+          <object class="GtkGrid" id="preview_grid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkMenuItem" id="menu_file">
+              <object class="GtkLabel" id="video_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_File</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="submenu_file">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="submenu_file_quit">
-                        <property name="label">gtk-quit</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuItem" id="menu_help">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Help</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="submenu_help">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="menu_help_help">
-                        <property name="label">gtk-help</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="menu_help_about">
-                        <property name="label">gtk-about</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkPaned" id="paned2">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <child>
-              <object class="GtkGrid" id="preview_grid">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <object class="GtkLabel" id="video_label">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Video Feeds</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkSeparator" id="separator1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="audio_label">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Audio Feeds</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="top_attach">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkSeparator" id="separator2">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="top_attach">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkSeparator" id="separator3">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkImage" id="video_feed_preview1">
-                    <property name="width_request">100</property>
-                    <property name="height_request">100</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="stock">gtk-missing-image</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkImage" id="audio_feed_preview1">
-                    <property name="width_request">100</property>
-                    <property name="height_request">100</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="stock">gtk-missing-image</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="top_attach">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkSeparator" id="separator4">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
+                <property name="label" translatable="yes">Video Feeds</property>
               </object>
               <packing>
-                <property name="resize">False</property>
-                <property name="shrink">True</property>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="primary_box">
+              <object class="GtkSeparator" id="separator1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="audio_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Audio Feeds</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator" id="separator2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator" id="separator3">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage" id="video_feed_preview1">
+                <property name="width_request">100</property>
+                <property name="height_request">100</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="stock">gtk-missing-image</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage" id="audio_feed_preview1">
+                <property name="width_request">100</property>
+                <property name="height_request">100</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="stock">gtk-missing-image</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator" id="separator4">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="resize">False</property>
+            <property name="shrink">True</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="primary_box">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkBox" id="composite_buttons">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkToolbar" id="composite_mode_toolbar">
+                  <object class="GtkRadioButton" id="composite_none_button">
+                    <property name="label" translatable="yes">No Composition</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="toolbar_style">both</property>
-                    <property name="show_arrow">False</property>
-                    <child>
-                      <object class="GtkRadioToolButton" id="composite_none">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">None</property>
-                        <property name="use_underline">True</property>
-                        <property name="icon_widget">icon_composite_none</property>
-                        <property name="active">True</property>
-                        <property name="group">composite_mode</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="homogeneous">True</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkRadioToolButton" id="composite_pip">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Picture In Picture</property>
-                        <property name="use_underline">True</property>
-                        <property name="icon_widget">icon_composite_pip</property>
-                        <property name="active">True</property>
-                        <property name="group">composite_mode</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="homogeneous">True</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkRadioToolButton" id="composite_sbs_preview">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Side by Side - Preview</property>
-                        <property name="use_underline">True</property>
-                        <property name="icon_widget">icon_composite_sbs_preview</property>
-                        <property name="active">True</property>
-                        <property name="group">composite_mode</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="homogeneous">True</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkRadioToolButton" id="composite_sbs_dual">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Side by Side - Equal</property>
-                        <property name="use_underline">True</property>
-                        <property name="icon_widget">icon_composite_sbs_dual</property>
-                        <property name="active">True</property>
-                        <property name="group">composite_mode</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="homogeneous">True</property>
-                      </packing>
-                    </child>
+                    <property name="receives_default">False</property>
+                    <property name="image">composite_none</property>
+                    <property name="xalign">0</property>
+                    <property name="image_position">top</property>
+                    <property name="always_show_image">True</property>
+                    <property name="active">True</property>
+                    <property name="draw_indicator">False</property>
+                    <accelerator key="F1" signal="clicked"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -290,12 +165,113 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkDrawingArea" id="primary_video">
-                    <property name="width_request">1280</property>
-                    <property name="height_request">720</property>
+                  <object class="GtkRadioButton" id="composite_pip_button">
+                    <property name="label" translatable="yes">Picture-in-Picture</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="double_buffered">False</property>
+                    <property name="receives_default">False</property>
+                    <property name="image">composite_pip</property>
+                    <property name="xalign">0</property>
+                    <property name="image_position">top</property>
+                    <property name="always_show_image">True</property>
+                    <property name="draw_indicator">False</property>
+                    <property name="group">composite_none_button</property>
+                    <accelerator key="F2" signal="clicked"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="composite_sbs_equal_button">
+                    <property name="label" translatable="yes">Side-by-Side Equal</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="receives_default">False</property>
+                    <property name="image">composite_sbs_equal</property>
+                    <property name="xalign">0</property>
+                    <property name="image_position">top</property>
+                    <property name="always_show_image">True</property>
+                    <property name="draw_indicator">False</property>
+                    <property name="group">composite_none_button</property>
+                    <accelerator key="F3" signal="clicked"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="composite_sbs_preview_button">
+                    <property name="label" translatable="yes">Side-by-Side Preview</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="receives_default">False</property>
+                    <property name="image">composite_sbs_preview</property>
+                    <property name="xalign">0</property>
+                    <property name="image_position">top</property>
+                    <property name="always_show_image">True</property>
+                    <property name="draw_indicator">False</property>
+                    <property name="group">composite_none_button</property>
+                    <accelerator key="F4" signal="clicked"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkDrawingArea" id="primary_video">
+                <property name="width_request">1280</property>
+                <property name="height_request">720</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="double_buffered">False</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="record_box">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkToggleButton" id="record_newfile">
+                    <property name="label">gtk-media-record</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_stock">True</property>
+                    <property name="always_show_image">True</property>
+                    <property name="active">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">3</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="record_filename">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="editable">False</property>
+                    <property name="text" translatable="yes">asdfsa_2004-02-12-13:45:12.dat</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -304,77 +280,18 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="record_box">
+                  <object class="GtkLabel" id="record_size">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkToggleButton" id="record_newfile">
-                        <property name="label">gtk-media-record</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="use_stock">True</property>
-                        <property name="always_show_image">True</property>
-                        <property name="active">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="padding">3</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="record_filename">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="editable">False</property>
-                        <property name="text" translatable="yes">asdfsa_2004-02-12-13:45:12.dat</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="record_size">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_left">3</property>
-                        <property name="margin_right">3</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
-                        <property name="xpad">5</property>
-                        <property name="ypad">1</property>
-                        <property name="label" translatable="yes">00:30:24
+                    <property name="margin_left">3</property>
+                    <property name="margin_right">3</property>
+                    <property name="margin_top">3</property>
+                    <property name="margin_bottom">3</property>
+                    <property name="xpad">5</property>
+                    <property name="ypad">1</property>
+                    <property name="label" translatable="yes">00:30:24
 203mb</property>
-                        <property name="justify">right</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkProgressBar" id="record_disk">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_left">3</property>
-                        <property name="margin_right">3</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
-                        <property name="fraction">0.10000000000000001</property>
-                        <property name="text" translatable="yes">2.98g free</property>
-                        <property name="show_text">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">3</property>
-                      </packing>
-                    </child>
+                    <property name="justify">right</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -382,17 +299,35 @@
                     <property name="position">2</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkProgressBar" id="record_disk">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">3</property>
+                    <property name="margin_right">3</property>
+                    <property name="margin_top">3</property>
+                    <property name="margin_bottom">3</property>
+                    <property name="fraction">0.10000000000000001</property>
+                    <property name="text" translatable="yes">2.98g free</property>
+                    <property name="show_text">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
               </object>
               <packing>
-                <property name="resize">False</property>
-                <property name="shrink">True</property>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="resize">False</property>
+            <property name="shrink">True</property>
           </packing>
         </child>
       </object>
