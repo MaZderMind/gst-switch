@@ -420,25 +420,24 @@ gst_switch_controller_set_property (GstSwitchController * controller,
  *  @memberof GstSwitchController
  *  @param controller the GstSwitchController instance
  *  @param port the port number
- *  @param serve value of GstSwitchServeStreamType
  *  @param type value of GstCaseType
  *
  *  Tell the preview port to the clients.
  */
 void
 gst_switch_controller_tell_preview_port_added (GstSwitchController * controller,
-    gint port, gint serve, gint type)
+    gint port, gint type)
 {
   gst_switch_controller_emit_signal (controller, "preview_port_added",
-      g_variant_new ("(iii)", port, serve, type));
+      g_variant_new ("(ii)", port, type));
 }
 
 void
 gst_switch_controller_tell_preview_port_removed (GstSwitchController *
-    controller, gint port, gint serve, gint type)
+    controller, gint port, gint type)
 {
   gst_switch_controller_emit_signal (controller, "preview_port_removed",
-      g_variant_new ("(iii)", port, serve, type));
+      g_variant_new ("(ii)", port, type));
 }
 
 /**

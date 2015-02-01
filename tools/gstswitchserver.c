@@ -484,7 +484,7 @@ gst_switch_server_end_case (GstCase * cas, GstSwitchServer * srv)
       GST_SWITCH_SERVER_LOCK_CONTROLLER (srv);
       if (srv->controller) {
         gst_switch_controller_tell_preview_port_removed (srv->controller,
-            cas->sink_port, cas->serve_type, cas->type);
+            cas->sink_port, cas->serve_type);
       }
       GST_SWITCH_SERVER_UNLOCK_CONTROLLER (srv);
 
@@ -509,7 +509,7 @@ gst_switch_server_start_case (GstCase * cas, GstSwitchServer * srv)
       GST_SWITCH_SERVER_LOCK_CONTROLLER (srv);
       if (srv->controller) {
         gst_switch_controller_tell_preview_port_added (srv->controller,
-            cas->sink_port, cas->serve_type, cas->type);
+            cas->sink_port, cas->serve_type);
       }
       GST_SWITCH_SERVER_UNLOCK_CONTROLLER (srv);
 

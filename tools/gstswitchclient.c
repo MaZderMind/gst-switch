@@ -498,12 +498,12 @@ gst_switch_client_connect (GstSwitchClient * client, const gchar * address)
  */
 static void
 gst_switch_client_add_preview_port (GstSwitchClient * client, gint port,
-    gint serve, gint type)
+    gint type)
 {
   GstSwitchClientClass *klass =
       GST_SWITCH_CLIENT_CLASS (G_OBJECT_GET_CLASS (client));
   if (klass->add_preview_port)
-    (*klass->add_preview_port) (client, port, serve, type);
+    (*klass->add_preview_port) (client, port, type);
 }
 
 /**
@@ -560,10 +560,10 @@ gst_switch_client_on_signal_received (GDBusConnection * connection,
 
     gst_switch_client_new_mode_online (client, mode);
   } else if (g_strcmp0 ("preview_port_added", signal_name) == 0) {
-    gint port = 0, serve = 0, type = 0;
-    g_variant_get (parameters, "(iii)", &port, &serve, &type);
+    gint port = 0, type = 0;
+    g_variant_get (parameters, "(ii)", &port, &type);
 
-    gst_switch_client_add_preview_port (client, port, serve, type);
+    gst_switch_client_add_preview_port (client, port, type);
   } else if (g_strcmp0 ("show_face_marker", signal_name) == 0) {
     gst_switch_client_show_face_marker (client, parameters);
   } else if (g_strcmp0 ("show_track_marker", signal_name) == 0) {

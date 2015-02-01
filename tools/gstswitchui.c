@@ -357,7 +357,7 @@ gst_switch_ui_on_controller_closed (GstSwitchUI * ui, GError * error)
 
 static void gst_switch_ui_set_audio_port (GstSwitchUI *, gint);
 static void gst_switch_ui_set_compose_port (GstSwitchUI *, gint);
-static void gst_switch_ui_add_preview_port (GstSwitchUI *, gint, gint, gint);
+static void gst_switch_ui_add_preview_port (GstSwitchUI *, gint, gint);
 
 /**
  * @brief
@@ -385,15 +385,15 @@ gst_switch_ui_prepare_videos (GstSwitchUI * ui)
     GVariant *ports = NULL;
     GError *error = NULL;
     gchar *s = NULL;
-    gint serve, type;
+    gint type;
 
     g_variant_get (preview_ports, "(&s)", &s);
     ports = g_variant_parse (G_VARIANT_TYPE ("a(iii)"), s, NULL, NULL, &error);
 
     num_previews = g_variant_n_children (ports);
     for (n = 0; n < num_previews; ++n) {
-      g_variant_get_child (ports, n, "(iii)", &port, &serve, &type);
-      gst_switch_ui_add_preview_port (ui, port, serve, type);
+      g_variant_get_child (ports, n, "(ii)", &port, &type);
+      gst_switch_ui_add_preview_port (ui, port, type);
       //INFO ("preview: %d, %d, %d", port, serve, type);
     }
   }
@@ -849,8 +849,7 @@ gst_switch_ui_preview_click (GtkWidget * w, GdkEvent * event, GstSwitchUI * ui)
  * @memberof GstSwitchUI
  */
 static void
-gst_switch_ui_add_preview_port (GstSwitchUI * ui, gint port, gint serve,
-    gint type)
+gst_switch_ui_add_preview_port (GstSwitchUI * ui, gint port, gint type)
 {
   GstVideoDisp *disp = NULL;
   GstAudioVisual *visual = NULL;
@@ -882,7 +881,7 @@ gst_switch_ui_add_preview_port (GstSwitchUI * ui, gint port, gint serve,
      GST_CASE_BRANCH_PREVIEW,
    */
 
-  switch (serve) {
+  switch (type) {
     case GST_SERVE_VIDEO_STREAM:
       disp = gst_switch_ui_new_video_disp (ui, preview, port);
       disp->type = type;

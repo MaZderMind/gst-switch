@@ -45,7 +45,7 @@ typedef void (*GstSwitchClientSetEncodePortFunc) (GstSwitchClient * client,
 typedef void (*GstSwitchClientSetAudioPortFunc) (GstSwitchClient * client,
     gint port);
 typedef void (*GstSwitchClientAddPreviewPortFunc) (GstSwitchClient * client,
-    gint port, gint serve, gint type);
+    gint port, gint type);
 typedef void (*GstSwitchClientNewModeOnlineFunc) (GstSwitchClient * client,
     gint port);
 typedef void (*GstSwitchClientSelectFaceFunc) (GstSwitchClient * client,
@@ -84,8 +84,7 @@ struct _GstSwitchClientClass
   void (*set_audio_port) (GstSwitchClient * client, gint port);
   void (*set_compose_port) (GstSwitchClient * client, gint port);
   void (*set_encode_port) (GstSwitchClient * client, gint port);
-  void (*add_preview_port) (GstSwitchClient * client, gint port, gint serve,
-      gint type);
+  void (*add_preview_port) (GstSwitchClient * client, gint port, gint type);
   void (*new_mode_online) (GstSwitchClient * client, gint mode);
   void (*select_face) (GstSwitchClient * client, gint x, gint y);
   void (*show_face_marker) (GstSwitchClient * client, GVariant * faces);

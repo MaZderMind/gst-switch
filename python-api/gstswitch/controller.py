@@ -439,11 +439,10 @@ class Controller(object):
         The Callback takes the following Arguments:
            int port  - The TCP-Port on the Server where the
                        Preview-Stream can be obtained from
-           int serve - Type of Material served
+           int type - Type of Material served
                        0 = GST_SERVE_NOTHING
                        1 = GST_SERVE_VIDEO_STREAM
                        2 = GST_SERVE_VIDEO_AUDIO
-           int type  - Type of Branch serving the Video
         """
 
         if not callable(callback):
@@ -460,11 +459,10 @@ class Controller(object):
         The Callback takes the following Arguments:
             int port  - The TCP-Port on the Server where the
                         Preview-Stream was provided
-            int serve - Type of Material served
+            int type  - Type of Material served
                         0 = GST_SERVE_NOTHING
                         1 = GST_SERVE_VIDEO_STREAM
                         2 = GST_SERVE_VIDEO_AUDIO
-            int type  - Type of Branch serving the Video
         """
 
         if not callable(callback):
