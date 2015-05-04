@@ -245,8 +245,8 @@ class TestSignals(IntegrationTestbaseMainloop):
         self.run_mainloop(timeout=5)
 
         self.log.info("test_cb called with: %s", test_cb.call_args_list)
-        test_cb.assert_any_call(3003, 1, 7)
-        test_cb.assert_any_call(3004, 1, 8)
+        test_cb.assert_any_call(3003, 1)
+        test_cb.assert_any_call(3004, 1)
         assert test_cb.call_count == 2
 
 
