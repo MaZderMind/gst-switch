@@ -71,7 +71,7 @@ class UIController:
     # Select the correct Button and set it Active
     composite_buttons = self.get_check_widget('composite_buttons')
     buttons = composite_buttons.get_children()
-    buttons[mode-1].set_active(True)
+    buttons[mode].set_active(True)
 
     # Connect Callback-Events with UI-Controller function
     self.builder.connect_signals({
